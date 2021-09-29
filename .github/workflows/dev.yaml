@@ -1,0 +1,20 @@
+name: "Paths-filter test"
+on:
+  pull_request:
+    branches:
+      - "master"
+    types: [opened, synchronize, closed]
+
+- name: Check if file has changed
+  uses: dorny/paths-filter@v2
+  id: changes
+  with:
+    filters: |
+      src:
+        - 'src/**'
+  run: |
+    ./test.sh
+
+- name: Check if file has not changed
+  run: |
+    ./test-nochange.sh
