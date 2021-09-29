@@ -27,8 +27,9 @@ jobs:
       run: |
         ./test-nochange.sh
   change:
-    name: File no change
+    name: File change
     runs-on: ubuntu-latest
+    steps:
     - if: ${{ needs.changes.outputs.src == 'true' }}
       run: |
         ./test.sh
