@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check if file has not changed
         run: |
-          ./test_nochange.sh
+          sh ./test_nochange.sh
   change:
     name: File change
     needs: paths-filter
@@ -40,4 +40,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check if file has changed
         run: |
-          ./test.sh
+          sh ./test.sh
