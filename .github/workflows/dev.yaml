@@ -1,8 +1,11 @@
 name: "Paths-filter test"
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
-      - "master"
+      - master
     types: [opened, synchronize, closed]
 
 jobs:
