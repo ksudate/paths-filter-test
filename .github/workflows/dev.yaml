@@ -28,7 +28,7 @@ jobs:
     steps:
     - name: Check if file has not changed
       run: |
-        ./test-nochange.sh
+        ./test_nochange.sh
   change:
     name: File change
     needs: paths-filter
