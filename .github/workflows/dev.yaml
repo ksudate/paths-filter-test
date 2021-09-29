@@ -34,7 +34,7 @@ jobs:
   change:
     name: File change
     needs: paths-filter
-    if: ${{ needs.changes.outputs.src == 'true' }}
+    if: ${{ needs.paths-filter.outputs.src == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
