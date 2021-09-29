@@ -6,24 +6,29 @@ on:
     types: [opened, synchronize, closed]
 
 jobs:
-  change:
-    name: File change
+  paths-filter:
     runs-on: ubuntu-latest
+    outputs:
+      src: ${{ steps.filter.outputs.src }}
     steps:
-      - name: Check if file has changed
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            src:
-              - 'src/**'
-        run: |
-          ./test.sh
+    - uses: dorny/paths-filter@v2
+    - uses: actions/checkout@v2
+      id: filter
+      with:
+        filters: |
+          src:
+            - 'src/**'
 
   nochange:
     name: File no change
     runs-on: ubuntu-latest
     steps:
-      - name: Check if file has not changed
-        run: |
-          ./test-nochange.sh
+    - name: Check if file has not changed
+      run: |
+        ./test-nochange.sh
+  change:
+    name: File no change
+    runs-on: ubuntu-latest
+    - if: ${{ needs.changes.outputs.src == 'true' }}
+      run: |
+        ./test.sh
