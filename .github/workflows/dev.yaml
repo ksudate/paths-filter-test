@@ -5,16 +5,25 @@ on:
       - "master"
     types: [opened, synchronize, closed]
 
-- name: Check if file has changed
-  uses: dorny/paths-filter@v2
-  id: changes
-  with:
-    filters: |
-      src:
-        - 'src/**'
-  run: |
-    ./test.sh
+jobs:
+  change:
+    name: File change
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if file has changed
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            src:
+              - 'src/**'
+        run: |
+          ./test.sh
 
-- name: Check if file has not changed
-  run: |
-    ./test-nochange.sh
+  nochange:
+    name: File no change
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if file has not changed
+        run: |
+          ./test-nochange.sh
