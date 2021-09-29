@@ -27,8 +27,8 @@ jobs:
     needs: paths-filter
     runs-on: ubuntu-latest
     steps:
-      - name: Check if file has not changed
       - uses: actions/checkout@v2
+      - name: Check if file has not changed
         run: |
           ./test_nochange.sh
   change:
@@ -37,7 +37,7 @@ jobs:
     if: ${{ needs.changes.outputs.src == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check if file has changed
       - uses: actions/checkout@v2
+      - name: Check if file has changed
         run: |
           ./test.sh
