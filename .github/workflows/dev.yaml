@@ -15,7 +15,6 @@ jobs:
       src: ${{ steps.filter.outputs.src }}
     steps:
     - uses: dorny/paths-filter@v2
-    - uses: actions/checkout@v2
       id: filter
       with:
         filters: |
@@ -24,6 +23,7 @@ jobs:
 
   nochange:
     name: File no change
+    needs: paths-filter
     runs-on: ubuntu-latest
     steps:
     - name: Check if file has not changed
@@ -31,6 +31,7 @@ jobs:
         ./test-nochange.sh
   change:
     name: File change
+    needs: paths-filter
     runs-on: ubuntu-latest
     steps:
     - if: ${{ needs.changes.outputs.src == 'true' }}
