@@ -27,17 +27,17 @@ jobs:
     needs: paths-filter
     runs-on: ubuntu-latest
     steps:
-    - name: Check if file has not changed
-    - uses: actions/checkout@v2
-      run: |
-        ./test_nochange.sh
+      - name: Check if file has not changed
+      - uses: actions/checkout@v2
+        run: |
+          ./test_nochange.sh
   change:
     name: File change
     needs: paths-filter
+    if: ${{ needs.changes.outputs.src == 'true' }}
     runs-on: ubuntu-latest
     steps:
-    - name: Check if file has changed
-    - uses: actions/checkout@v2
-    - if: ${{ needs.changes.outputs.src == 'true' }}
-      run: |
-        ./test.sh
+      - name: Check if file has changed
+      - uses: actions/checkout@v2
+        run: |
+          ./test.sh
