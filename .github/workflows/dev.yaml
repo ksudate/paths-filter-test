@@ -11,13 +11,11 @@ jobs:
     outputs:
       src: ${{ steps.filter.outputs.src }}
     steps:
-    - uses: actions/checkout@v2
-    - uses: dorny/paths-filter@v2
-      id: filter
-      with:
-        filters: |
-          src:
-            - 'src/**'
+      - uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: .github/file-filters.yml
 
   nochange:
     name: File no change
